@@ -17,7 +17,7 @@ public class MyGame extends Game {
 
 	@Override
 	public void create () {
-		setScreen(new SplashScreen());
+		setScreen(new SplashScreen(this));
 	}
 
 	@Override
