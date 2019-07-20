@@ -34,7 +34,7 @@ public class SplashScreen implements Screen {
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
 
-        if (assetManager.update() && TimeUtils.timeSinceMillis(startTime) > 10000) {
+        if (assetManager.update() && TimeUtils.timeSinceMillis(startTime) > 1) {
             app.setScreen(new MenuScreen());
         }
     }
