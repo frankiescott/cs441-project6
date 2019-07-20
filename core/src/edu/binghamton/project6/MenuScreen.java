@@ -3,11 +3,11 @@ package edu.binghamton.project6;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class MenuScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
+    private Texture splashImg;
 
     public MenuScreen() {
         super();
@@ -33,7 +34,7 @@ public class MenuScreen implements Screen {
         TextButton leaderboard = new TextButton("Leaderboard", skin,"small");
 
         play.getLabel().setFontScale(4.0f);
-        play.setSize(col_width*5,row_height);
+        play.setSize(col_width*4,row_height);
         play.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*4);
         play.addListener(new InputListener(){
             @Override
@@ -47,11 +48,11 @@ public class MenuScreen implements Screen {
         });
 
         controls.getLabel().setFontScale(4.0f);
-        controls.setSize(col_width*5,row_height);
+        controls.setSize(col_width*4,row_height);
         controls.setPosition(col_width*4,(float) (Gdx.graphics.getHeight() - row_height*5.5));
 
         leaderboard.getLabel().setFontScale(4.0f);
-        leaderboard.setSize(col_width*5,row_height);
+        leaderboard.setSize(col_width*4,row_height);
         leaderboard.setPosition(col_width*4,Gdx.graphics.getHeight() - row_height*7);
 
         stage.addActor(play);
@@ -63,7 +64,11 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        splashImg = new Texture("splash.png");
+
         batch.begin();
+        batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
 
         stage.act();
