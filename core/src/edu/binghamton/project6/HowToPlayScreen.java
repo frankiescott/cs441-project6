@@ -5,7 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -24,6 +27,30 @@ public class HowToPlayScreen implements Screen {
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+
+        configureButton();
+    }
+
+    public void configureButton() {
+        float row_height = Gdx.graphics.getWidth() / 12;
+        float col_width = Gdx.graphics.getWidth() / 12;
+        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
+        back = new TextButton("Back", skin,"small");
+        back.getLabel().setFontScale(4.0f);
+        back.setSize(col_width*4,row_height);
+        back.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*7);
+        back.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                app.setScreen(new MenuScreen(app));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+        stage.addActor(back);
     }
 
     @Override
