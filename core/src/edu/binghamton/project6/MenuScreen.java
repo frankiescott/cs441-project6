@@ -16,36 +16,32 @@ public class MenuScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
     private Texture splashImg;
+    private TextButton play, controls, leaderboard;
+    private final MyGame app;
 
-    public MenuScreen() {
+    public MenuScreen(final MyGame app) {
         super();
+        this.app = app;
         batch = new SpriteBatch();
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        configureButtons();
+    }
 
+    public void configureButtons() {
         float row_height = Gdx.graphics.getWidth() / 12;
         float col_width = Gdx.graphics.getWidth() / 12;
+        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        TextButton play = new TextButton("Play", skin,"small");
-        TextButton controls = new TextButton("Controls", skin,"small");
-        TextButton leaderboard = new TextButton("Leaderboard", skin,"small");
+        play = new TextButton("Play", skin,"small");
+        controls = new TextButton("How To Play", skin,"small");
+        leaderboard = new TextButton("Leaderboard", skin,"small");
 
         play.getLabel().setFontScale(4.0f);
         play.setSize(col_width*4,row_height);
         play.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*4);
-        play.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
 
         controls.getLabel().setFontScale(4.0f);
         controls.setSize(col_width*4,row_height);
@@ -54,6 +50,17 @@ public class MenuScreen implements Screen {
         leaderboard.getLabel().setFontScale(4.0f);
         leaderboard.setSize(col_width*4,row_height);
         leaderboard.setPosition(col_width*4,Gdx.graphics.getHeight() - row_height*7);
+
+        play.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                app.setScreen(new GameScreen(app));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
 
         stage.addActor(play);
         stage.addActor(controls);
