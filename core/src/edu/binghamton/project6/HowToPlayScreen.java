@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,17 +20,30 @@ public class HowToPlayScreen implements Screen {
     private Texture splashImg;
 
     private Stage stage;
+    BitmapFont titleFont, textFont;
     private TextButton back;
 
     public HowToPlayScreen(final MyGame app) {
         super();
         this.app = app;
         batch = new SpriteBatch();
-
+        titleFont = new BitmapFont();
+        textFont = new BitmapFont();
         stage = new Stage(new ScreenViewport());
+
         Gdx.input.setInputProcessor(stage);
 
         configureButton();
+
+        FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consolab.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter titleParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        titleParameter.size = 100;
+        titleFont = title.generateFont(titleParameter);
+
+        FreeTypeFontGenerator text = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter textParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        textParameter.size = 50;
+        textFont = title.generateFont(textParameter);
     }
 
     public void configureButton() {
@@ -55,6 +70,9 @@ public class HowToPlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        float row_height = Gdx.graphics.getWidth() / 12;
+        float col_width = Gdx.graphics.getWidth() / 12;
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -62,6 +80,8 @@ public class HowToPlayScreen implements Screen {
 
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        titleFont.draw(batch, "How to Play",col_width*4,Gdx.graphics.getHeight()-50);
+        textFont.draw(batch, "Instructions on how to play the game will be displayed here",col_width*4,Gdx.graphics.getHeight()-row_height*2);
         batch.end();
 
         stage.act();
@@ -96,5 +116,7 @@ public class HowToPlayScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+        titleFont.dispose();
+        textFont.dispose();
     }
 }
