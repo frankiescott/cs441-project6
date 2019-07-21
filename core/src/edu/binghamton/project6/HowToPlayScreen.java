@@ -47,14 +47,14 @@ public class HowToPlayScreen implements Screen {
     }
 
     public void configureButton() {
-        float row_height = Gdx.graphics.getWidth() / 12;
+        float row_height = Gdx.graphics.getHeight() / 12;
         float col_width = Gdx.graphics.getWidth() / 12;
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         back = new TextButton("Back", skin,"small");
         back.getLabel().setFontScale(4.0f);
-        back.setSize(col_width*4,row_height);
-        back.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*7);
+        back.setSize(col_width*4,row_height*1.5F);
+        back.setPosition(col_width*4,row_height);
         back.addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -70,7 +70,7 @@ public class HowToPlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        float row_height = Gdx.graphics.getWidth() / 12;
+        float row_height = Gdx.graphics.getHeight() / 12;
         float col_width = Gdx.graphics.getWidth() / 12;
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
