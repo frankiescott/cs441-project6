@@ -6,10 +6,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import static java.lang.Math.abs;
+
 public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Texture splashImg;
     final MyGame app;
+
+    private Player player;
+    private float w, h;
+    private float gravity;
 
     public GameScreen(final MyGame app) {
         super();
@@ -17,6 +23,9 @@ public class GameScreen implements Screen {
 
         batch = new SpriteBatch();
         splashImg = new Texture("splash.png");
+
+        gravity = -4;
+        player = new Player(0, 0, 15, 0, "badlogic.jpg", 500);
     }
 
     @Override
@@ -27,6 +36,9 @@ public class GameScreen implements Screen {
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
+
+        player.update();
+        player.render();
     }
 
     @Override
@@ -51,12 +63,96 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        w = width;
+        h = height;
     }
 
     @Override
     public void dispose() {
         splashImg.dispose();
         batch.dispose();
+    }
+
+    class GameObject {
+        float x, y;
+        float dx, dy;
+        Texture img;
+        int imgWidth, imgHeight;
+
+        GameObject(int x, int y, int dx, int dy, String img) {
+            this.x = (float) x;
+            this.y = (float) y;
+            this.dx = (float) dx;
+            this.dy = (float) dy;
+            this.img = new Texture(img);
+            this.imgHeight = this.img.getHeight();
+            this.imgWidth = this.img.getWidth();
+        }
+
+        public void render() {
+            batch.begin();
+            batch.draw(this.img, this.x, this.y);
+            batch.end();
+        }
+
+        public void update() {
+            //jumping physics
+            if ((this.y <= 4) && (abs(this.dy) <= 4)) {
+                this.y = 0;
+                this.dy = 0;
+            } else {
+                this.dy = this.dy + gravity;
+            }
+
+            //update position on screen
+            this.x = this.x + this.dx;
+            this.y = this.y + this.dy;
+
+            //wall collision
+            if ((this.x > (w - this.imgWidth)) || (this.x < 0)) {
+                this.dx = -this.dx;
+            }
+
+            //ground collision
+            if (this.y < 0) {
+                this.dy = 0;
+                this.y = 0;
+            }
+        }
+    }
+
+    class Player extends GameObject {
+        int health;
+
+        Player(int x, int y, int dx, int dy, String img, int health) {
+            super(x, y, dx, dy, img);
+            this.health = health;
+        }
+
+        @Override
+        public void update() {
+            //jumping physics
+            if ((this.y <= 4) && (abs(this.dy) <= 4)) {
+                this.y = 0;
+                this.dy = 0;
+            } else {
+                this.dy = this.dy + gravity;
+            }
+
+            //update position on screen
+            this.x = this.x + this.dx;
+            this.y = this.y + this.dy;
+
+            //wall collision
+            if ((this.x > (w - this.imgWidth)) || (this.x < 0)) {
+                this.dx = -this.dx;
+            }
+
+            //ground collision
+            if (this.y < 0) {
+                this.dy = 0;
+                this.y = 0;
+            }
+        }
     }
 }
