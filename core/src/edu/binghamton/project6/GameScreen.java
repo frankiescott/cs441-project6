@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static java.lang.Math.abs;
 
 public class GameScreen implements Screen {
+    private final MyGame app;
     private SpriteBatch batch;
     private Texture splashImg;
-    final MyGame app;
 
     private Player player;
     private float w, h;

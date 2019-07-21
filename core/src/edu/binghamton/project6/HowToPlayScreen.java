@@ -2,30 +2,28 @@ package edu.binghamton.project6;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class SplashScreen implements Screen {
+public class HowToPlayScreen implements Screen {
     private final MyGame app;
     private SpriteBatch batch;
     private Texture splashImg;
 
-    //used for loading assets and changing to menu screen
-    private long startTime;
-    private AssetManager assetManager;
+    private Stage stage;
+    private TextButton back;
 
-    public SplashScreen(final MyGame app) {
+    public HowToPlayScreen(final MyGame app) {
         super();
         this.app = app;
-
-        startTime = TimeUtils.millis();
-        assetManager = new AssetManager();
-
         batch = new SpriteBatch();
-        splashImg = new Texture("splash.png");
+
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -33,14 +31,14 @@ public class SplashScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        splashImg = new Texture("splash.png");
+
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
 
-        //driver to change to menu screen
-        if (assetManager.update() && TimeUtils.timeSinceMillis(startTime) > 1) {
-            app.setScreen(new MenuScreen(app));
-        }
+        stage.act();
+        stage.draw();
     }
 
     @Override
@@ -70,7 +68,6 @@ public class SplashScreen implements Screen {
 
     @Override
     public void dispose() {
-        splashImg.dispose();
         batch.dispose();
     }
 }

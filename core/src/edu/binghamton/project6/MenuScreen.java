@@ -13,11 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class MenuScreen implements Screen {
-    private SpriteBatch batch;
-    private Stage stage;
-    private Texture splashImg;
-    private TextButton play, controls, leaderboard;
     private final MyGame app;
+    private SpriteBatch batch;
+    private Texture splashImg;
+
+    private Stage stage;
+    private TextButton play, controls, leaderboard;
 
     public MenuScreen(final MyGame app) {
         super();
@@ -62,6 +63,16 @@ public class MenuScreen implements Screen {
             }
         });
 
+        controls.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                app.setScreen(new HowToPlayScreen(app));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
         stage.addActor(play);
         stage.addActor(controls);
         stage.addActor(leaderboard);
