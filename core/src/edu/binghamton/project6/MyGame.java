@@ -14,6 +14,8 @@ public class MyGame extends Game {
 
 	public float row_height;
 	public float col_width;
+	public float height;
+	public float width;
 	public Skin skin;
 
 	public MyGame() {
@@ -22,8 +24,10 @@ public class MyGame extends Game {
 
 	@Override
 	public void create () {
+		height = Gdx.graphics.getHeight();
 		row_height = Gdx.graphics.getHeight() / 12F;
 		col_width = Gdx.graphics.getWidth() / 12F;
+		width = Gdx.graphics.getWidth();
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 		setScreen(new SplashScreen(this));
 	}

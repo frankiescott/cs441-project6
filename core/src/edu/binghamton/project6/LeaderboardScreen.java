@@ -12,9 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -43,10 +43,12 @@ public class LeaderboardScreen implements Screen {
 
     public void configureList() {
         container = new Table();
+        //container.setDebug(true);
         stage.addActor(container);
         container.setFillParent(true);
-        Table table = new Table();
+        container.top();
 
+        Table table = new Table();
         final ScrollPane scroll = new ScrollPane(table, app.skin);
         scroll.setScrollingDisabled(true,false);
 
@@ -55,18 +57,17 @@ public class LeaderboardScreen implements Screen {
         fontParameter.size = 100;
         BitmapFont entryFont = font.generateFont(fontParameter);
 
-        table.pad(10).defaults().expandX().space(4);
         for (int i = 0; i < 100; i++) {
             table.row();
 
             Label.LabelStyle style = new Label.LabelStyle();
             style.font = entryFont;
-            Label entry = new Label("Hello World", style);
+            Label entry = new Label(i+1 + ". Player Name", style);
             entry.setAlignment(Align.center);
             entry.setWrap(true);
             table.add(entry).width(Gdx.graphics.getWidth());
         }
-        container.add(scroll).expand().fill();
+        container.add(scroll).height(app.row_height*9).expandX().fillX();
     }
     @Override
     public void render(float delta) {
