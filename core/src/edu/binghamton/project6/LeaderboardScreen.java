@@ -22,7 +22,6 @@ public class LeaderboardScreen implements Screen {
     private final MyGame app;
     private SpriteBatch batch;
     private Texture splashImg;
-    private Skin skin;
     private Stage stage;
     private TextButton back;
 
@@ -38,8 +37,6 @@ public class LeaderboardScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-
         configureButton();
         configureList();
     }
@@ -50,7 +47,7 @@ public class LeaderboardScreen implements Screen {
         container.setFillParent(true);
         Table table = new Table();
 
-        final ScrollPane scroll = new ScrollPane(table, skin);
+        final ScrollPane scroll = new ScrollPane(table, app.skin);
         scroll.setScrollingDisabled(true,false);
 
         FreeTypeFontGenerator font = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consolab.ttf"));
@@ -85,13 +82,10 @@ public class LeaderboardScreen implements Screen {
     }
 
     public void configureButton() {
-        float row_height = Gdx.graphics.getHeight() / 12;
-        float col_width = Gdx.graphics.getWidth() / 12;
-
-        back = new TextButton("Back", skin, "small");
+        back = new TextButton("Back", app.skin, "small");
         back.getLabel().setFontScale(4.0f);
-        back.setSize(col_width * 4, row_height * 1.5F);
-        back.setPosition(col_width * 4, row_height);
+        back.setSize(app.col_width * 4, app.row_height * 1.5F);
+        back.setPosition(app.col_width * 4, app.row_height);
         back.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {

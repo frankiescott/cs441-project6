@@ -6,10 +6,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class MyGame extends Game {
 	SpriteBatch batch;
 	Texture img;
+
+	public float row_height;
+	public float col_width;
+	public Skin skin;
 
 	public MyGame() {
 		super();
@@ -17,6 +22,9 @@ public class MyGame extends Game {
 
 	@Override
 	public void create () {
+		row_height = Gdx.graphics.getHeight() / 12F;
+		col_width = Gdx.graphics.getWidth() / 12F;
+		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 		setScreen(new SplashScreen(this));
 	}
 

@@ -20,7 +20,7 @@ public class HowToPlayScreen implements Screen {
     private Texture splashImg;
 
     private Stage stage;
-    BitmapFont titleFont, textFont;
+    private BitmapFont titleFont, textFont;
     private TextButton back;
 
     String howtoplay = "Instructions on how to play the game will be placed here.\n" +
@@ -51,14 +51,10 @@ public class HowToPlayScreen implements Screen {
     }
 
     public void configureButton() {
-        float row_height = Gdx.graphics.getHeight() / 12;
-        float col_width = Gdx.graphics.getWidth() / 12;
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-
-        back = new TextButton("Back", skin,"small");
+        back = new TextButton("Back", app.skin,"small");
         back.getLabel().setFontScale(4.0f);
-        back.setSize(col_width*4,row_height*1.5F);
-        back.setPosition(col_width*4,row_height);
+        back.setSize(app.col_width*4,app.row_height*1.5F);
+        back.setPosition(app.col_width*4,app.row_height);
         back.addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -74,9 +70,6 @@ public class HowToPlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        float row_height = Gdx.graphics.getHeight() / 12;
-        float col_width = Gdx.graphics.getWidth() / 12;
-
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -84,8 +77,8 @@ public class HowToPlayScreen implements Screen {
 
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        titleFont.draw(batch, "How to Play",col_width*4,Gdx.graphics.getHeight()-50);
-        textFont.draw(batch, howtoplay,0,Gdx.graphics.getHeight()-row_height*2, Gdx.graphics.getWidth(), 1, true);
+        titleFont.draw(batch, "How to Play",app.col_width*4,Gdx.graphics.getHeight()-50);
+        textFont.draw(batch, howtoplay,0,Gdx.graphics.getHeight()-app.row_height*2, Gdx.graphics.getWidth(), 1, true);
         batch.end();
 
         stage.act();

@@ -32,25 +32,21 @@ public class MenuScreen implements Screen {
     }
 
     public void configureButtons() {
-        float row_height = Gdx.graphics.getHeight() / 12;
-        float col_width = Gdx.graphics.getWidth() / 12;
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-
-        play = new TextButton("Play", skin,"small");
-        controls = new TextButton("How To Play", skin,"small");
-        leaderboard = new TextButton("Leaderboard", skin,"small");
+        play = new TextButton("Play", app.skin,"small");
+        controls = new TextButton("How To Play", app.skin,"small");
+        leaderboard = new TextButton("Leaderboard", app.skin,"small");
 
         play.getLabel().setFontScale(4.0f);
-        play.setSize(col_width*4,row_height*1.5F);
-        play.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*7);
+        play.setSize(app.col_width*4,app.row_height*1.5F);
+        play.setPosition(app.col_width*4,Gdx.graphics.getHeight()-app.row_height*7);
 
         controls.getLabel().setFontScale(4.0f);
-        controls.setSize(col_width*4,row_height*1.5F);
-        controls.setPosition(col_width*4,(float) (Gdx.graphics.getHeight() - row_height*9));
+        controls.setSize(app.col_width*4,app.row_height*1.5F);
+        controls.setPosition(app.col_width*4,(float) (Gdx.graphics.getHeight() - app.row_height*9));
 
         leaderboard.getLabel().setFontScale(4.0f);
-        leaderboard.setSize(col_width*4,row_height*1.5F);
-        leaderboard.setPosition(col_width*4,Gdx.graphics.getHeight() - row_height*11);
+        leaderboard.setSize(app.col_width*4,app.row_height*1.5F);
+        leaderboard.setPosition(app.col_width*4,Gdx.graphics.getHeight() - app.row_height*11);
 
         play.addListener(new InputListener(){
             @Override
