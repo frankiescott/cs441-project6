@@ -23,6 +23,10 @@ public class HowToPlayScreen implements Screen {
     BitmapFont titleFont, textFont;
     private TextButton back;
 
+    String howtoplay = "Instructions on how to play the game will be placed here.\n" +
+            "However, the game is not fully developed yet so this is just placeholder text.\n" +
+            "It will most likely have simple controls easy to illustrate with text";
+
     public HowToPlayScreen(final MyGame app) {
         super();
         this.app = app;
@@ -81,7 +85,7 @@ public class HowToPlayScreen implements Screen {
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         titleFont.draw(batch, "How to Play",col_width*4,Gdx.graphics.getHeight()-50);
-        textFont.draw(batch, "Instructions on how to play the game will be displayed here",col_width*4,Gdx.graphics.getHeight()-row_height*2);
+        textFont.draw(batch, howtoplay,0,Gdx.graphics.getHeight()-row_height*2, Gdx.graphics.getWidth(), 1, true);
         batch.end();
 
         stage.act();
