@@ -59,3 +59,4 @@ public class LeaderboardScreen implements Screen {
         splashImg.dispose();
         batch.dispose();
     }
+}

@@ -73,6 +73,17 @@ public class MenuScreen implements Screen {
                 return true;
             }
         });
+
+        leaderboard.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                app.setScreen(new LeaderboardScreen(app));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
         stage.addActor(play);
         stage.addActor(controls);
         stage.addActor(leaderboard);
