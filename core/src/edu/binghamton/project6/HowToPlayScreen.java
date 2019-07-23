@@ -121,6 +121,7 @@ public class HowToPlayScreen implements Screen {
     public void dispose() {
         batch.dispose();
         titleFont.dispose();
+        splashImg.dispose();
         textFont.dispose();
     }
 }
