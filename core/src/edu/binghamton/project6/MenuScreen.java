@@ -132,5 +132,7 @@ public class MenuScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+        stage.dispose();
+        splashImg.dispose();
     }
 }

@@ -4,21 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class LeaderboardScreen implements Screen {
     private final MyGame app;
     private SpriteBatch batch;
     private Texture splashImg;
-
+    private Skin skin;
     private Stage stage;
     private TextButton back;
+
+    private Table container;
 
     public LeaderboardScreen(final MyGame app) {
         super();
@@ -30,9 +38,39 @@ public class LeaderboardScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
         configureButton();
+        configureList();
     }
 
+    public void configureList() {
+        container = new Table();
+        stage.addActor(container);
+        container.setFillParent(true);
+        Table table = new Table();
+
+        final ScrollPane scroll = new ScrollPane(table, skin);
+        scroll.setScrollingDisabled(true,false);
+
+        FreeTypeFontGenerator font = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consolab.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = 100;
+        BitmapFont entryFont = font.generateFont(fontParameter);
+
+        table.pad(10).defaults().expandX().space(4);
+        for (int i = 0; i < 100; i++) {
+            table.row();
+
+            Label.LabelStyle style = new Label.LabelStyle();
+            style.font = entryFont;
+            Label entry = new Label("Hello World", style);
+            entry.setAlignment(Align.center);
+            entry.setWrap(true);
+            table.add(entry).width(Gdx.graphics.getWidth());
+        }
+        container.add(scroll).expand().fill();
+    }
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -49,7 +87,6 @@ public class LeaderboardScreen implements Screen {
     public void configureButton() {
         float row_height = Gdx.graphics.getHeight() / 12;
         float col_width = Gdx.graphics.getWidth() / 12;
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         back = new TextButton("Back", skin, "small");
         back.getLabel().setFontScale(4.0f);
@@ -98,5 +135,6 @@ public class LeaderboardScreen implements Screen {
     public void dispose() {
         splashImg.dispose();
         batch.dispose();
+        stage.dispose();
     }
 }

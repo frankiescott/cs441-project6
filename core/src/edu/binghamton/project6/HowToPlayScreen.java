@@ -123,5 +123,6 @@ public class HowToPlayScreen implements Screen {
         titleFont.dispose();
         splashImg.dispose();
         textFont.dispose();
+        stage.dispose();
     }
 }

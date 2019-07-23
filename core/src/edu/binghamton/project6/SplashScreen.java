@@ -71,6 +71,7 @@ public class SplashScreen implements Screen {
     @Override
     public void dispose() {
         splashImg.dispose();
+        assetManager.dispose();
         batch.dispose();
     }
 }
