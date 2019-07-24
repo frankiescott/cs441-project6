@@ -1,6 +1,7 @@
 package edu.binghamton.project6;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import java.util.Map;
 
 public class LeaderboardScreen implements Screen {
     private final MyGame app;
@@ -56,15 +59,20 @@ public class LeaderboardScreen implements Screen {
         fontParameter.size = 100;
         BitmapFont entryFont = font.generateFont(fontParameter);
 
-        for (int i = 0; i < 100; i++) {
+        Preferences prefs = Gdx.app.getPreferences("leaderboard");
+        Map<String,?> keys = prefs.get();
+        //populate list
+        int i = 0;
+        for (Map.Entry<String, ?> key : keys.entrySet()) {
             table.row();
 
             Label.LabelStyle style = new Label.LabelStyle();
             style.font = entryFont;
-            Label entry = new Label(i+1 + ". Player Name", style);
+            Label entry = new Label(i+1 + ". " + key.getKey() + " " + key.getValue().toString(), style);
             entry.setAlignment(Align.center);
             entry.setWrap(true);
             table.add(entry).width(Gdx.graphics.getWidth());
+            i++;
         }
         container.add(scroll).height(app.row_height*9).expandX().fillX();
     }
