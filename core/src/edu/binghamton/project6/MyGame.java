@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public class MyGame extends Game {
+public class MyGame extends Game implements DataInterface {
 	SpriteBatch batch;
 	Texture img;
 
@@ -36,5 +36,14 @@ public class MyGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+	}
+
+	@Override
+	public void loadData() {
+
+	}
+	@Override
+	public void saveData() {
+
 	}
 }
