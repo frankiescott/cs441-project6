@@ -18,8 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import java.util.Map;
-
 public class LeaderboardScreen implements Screen {
     private final MyGame app;
     private SpriteBatch batch;
@@ -60,22 +58,19 @@ public class LeaderboardScreen implements Screen {
         BitmapFont entryFont = font.generateFont(fontParameter);
 
         Preferences prefs = Gdx.app.getPreferences("leaderboard");
-        Map<String,?> keys = prefs.get();
-        //populate list
-        int i = 0;
-        for (Map.Entry<String, ?> key : keys.entrySet()) {
+        //top 10 scores are stored by their position on the leaderboard ex: #5 spot is accessed with the key "5"
+        for (int i = 1; i <= 10; ++i) {
             table.row();
-
             Label.LabelStyle style = new Label.LabelStyle();
             style.font = entryFont;
-            Label entry = new Label(i+1 + ". " + key.getKey() + " " + key.getValue().toString(), style);
+            Label entry = new Label(i + ". " + prefs.getString(Integer.toString(i)), style);
             entry.setAlignment(Align.center);
             entry.setWrap(true);
             table.add(entry).width(Gdx.graphics.getWidth());
-            i++;
         }
         container.add(scroll).height(app.row_height*9).expandX().fillX();
     }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
