@@ -1,6 +1,6 @@
 # cs441-project6
 
-This application is 
+This application is an interface shell for a game that will be developed during Project 7. The application consists of a splash screen and a main menu screen that links to the game screen, a how to play screen, and a leaderboard screen.
 
 I started by creating a generic splash screen image to display upon application startup. I then created a menu screen for the splash screen to switch to and programmed the transition to take place once all game assets have been loaded, and if the splash screen displayed for at least three seconds. From here, I created the button interface using the `glassy-ui` skin for the menu screen featuring a 'Play' button to launch the game, a 'How to Play' button to launch the instructions screen, and a 'Leaderboard' button to launch the leaderboard screen. I then created a 'Back' button for the how to play and leaderboard screens so the user has fluent control over the menu interface.
 
