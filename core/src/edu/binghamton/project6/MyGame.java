@@ -16,6 +16,7 @@ public class MyGame extends Game{
 	public float height;
 	public float width;
 	public Skin skin;
+    public Preferences prefs;
 
 	public MyGame() {
 		super();
@@ -23,11 +24,14 @@ public class MyGame extends Game{
 
 	@Override
 	public void create () {
+	    //these are all values we can access from any screen using app.variable
 		height = Gdx.graphics.getHeight();
 		row_height = Gdx.graphics.getHeight() / 12F;
 		col_width = Gdx.graphics.getWidth() / 12F;
 		width = Gdx.graphics.getWidth();
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        prefs = Gdx.app.getPreferences("leaderboard");
+
 		setScreen(new SplashScreen(this));
 	}
 

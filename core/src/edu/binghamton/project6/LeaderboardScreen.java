@@ -57,13 +57,12 @@ public class LeaderboardScreen implements Screen {
         fontParameter.size = 100;
         BitmapFont entryFont = font.generateFont(fontParameter);
 
-        Preferences prefs = Gdx.app.getPreferences("leaderboard");
         //top 10 scores are stored by their position on the leaderboard ex: #5 spot is accessed with the key "5"
         for (int i = 1; i <= 10; ++i) {
             table.row();
             Label.LabelStyle style = new Label.LabelStyle();
             style.font = entryFont;
-            Label entry = new Label(i + ". " + prefs.getString(Integer.toString(i)), style);
+            Label entry = new Label(i + ". " + app.prefs.getString(Integer.toString(i)), style);
             entry.setAlignment(Align.center);
             entry.setWrap(true);
             table.add(entry).width(Gdx.graphics.getWidth());
