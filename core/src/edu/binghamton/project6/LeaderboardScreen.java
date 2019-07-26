@@ -58,7 +58,7 @@ public class LeaderboardScreen implements Screen {
         final ScrollPane scroll = new ScrollPane(table, app.skin);
         scroll.setScrollingDisabled(true,false);
 
-        FreeTypeFontGenerator font = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consolab.ttf"));
+        FreeTypeFontGenerator font = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameter.size = 100;
         BitmapFont entryFont = font.generateFont(fontParameter);
