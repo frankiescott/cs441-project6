@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 import static java.lang.Math.abs;
 
@@ -16,6 +18,7 @@ public class GameScreen implements Screen {
     private Player player;
     private float w, h;
     private float gravity;
+    private BitmapFont textFont;
 
     public GameScreen(final MyGame app) {
         super();
@@ -26,6 +29,11 @@ public class GameScreen implements Screen {
 
         gravity = -4;
         player = new Player(0, 0, 15, 0, "badlogic.jpg", 500);
+
+        FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/BRUSHSCI.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter titleParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        titleParameter.size = 148;
+        textFont = title.generateFont(titleParameter);
     }
 
     @Override
@@ -35,6 +43,7 @@ public class GameScreen implements Screen {
 
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        textFont.draw(batch, "Game Screen",app.col_width*4,Gdx.graphics.getHeight()-50);
         batch.end();
 
         player.update();

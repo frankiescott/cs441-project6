@@ -23,8 +23,8 @@ public class HowToPlayScreen implements Screen {
     private TextButton back;
 
     String howtoplay = "Instructions on how to play the game will be placed here.\n" +
-            "However, the game is not fully developed yet so this is just placeholder text.\n" +
-            "It will most likely have simple controls easy to illustrate with text";
+            "Implementation of the game has not been developed yet.\n" +
+            "This page will be updated as soon as a control scheme is established.";
 
     public HowToPlayScreen(final MyGame app) {
         super();
@@ -40,13 +40,13 @@ public class HowToPlayScreen implements Screen {
 
         FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/BRUSHSCI.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter titleParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        titleParameter.size = 100;
+        titleParameter.size = 148;
         titleFont = title.generateFont(titleParameter);
 
-        FreeTypeFontGenerator text = new FreeTypeFontGenerator(Gdx.files.internal("fonts/BRUSHSCI.ttf"));
+        FreeTypeFontGenerator text = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter textParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         textParameter.size = 50;
-        textFont = title.generateFont(textParameter);
+        textFont = text.generateFont(textParameter);
     }
 
     public void configureButton() {
@@ -77,7 +77,7 @@ public class HowToPlayScreen implements Screen {
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         titleFont.draw(batch, "How to Play",app.col_width*4,Gdx.graphics.getHeight()-50);
-        textFont.draw(batch, howtoplay,0,Gdx.graphics.getHeight()-app.row_height*2, Gdx.graphics.getWidth(), 1, true);
+        textFont.draw(batch, howtoplay,0,Gdx.graphics.getHeight()-app.row_height*2.5F, Gdx.graphics.getWidth(), 1, true);
         batch.end();
 
         stage.act();

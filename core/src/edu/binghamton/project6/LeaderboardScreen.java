@@ -24,6 +24,7 @@ public class LeaderboardScreen implements Screen {
     private Texture splashImg;
     private Stage stage;
     private TextButton back;
+    private BitmapFont titleFont;
 
     private Table container;
 
@@ -39,6 +40,11 @@ public class LeaderboardScreen implements Screen {
 
         configureButton();
         configureList();
+
+        FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/BRUSHSCI.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter titleParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        titleParameter.size = 148;
+        titleFont = title.generateFont(titleParameter);
     }
 
     public void configureList() {
@@ -46,8 +52,7 @@ public class LeaderboardScreen implements Screen {
         //container.setDebug(true);
         stage.addActor(container);
         container.setFillParent(true);
-        container.top();
-
+        container.padBottom(app.row_height/2);
         Table table = new Table();
         final ScrollPane scroll = new ScrollPane(table, app.skin);
         scroll.setScrollingDisabled(true,false);
@@ -67,7 +72,7 @@ public class LeaderboardScreen implements Screen {
             entry.setWrap(true);
             table.add(entry).width(Gdx.graphics.getWidth());
         }
-        container.add(scroll).height(app.row_height*9).expandX().fillX();
+        container.add(scroll).height(app.row_height*6.5F).expandX().fillX();
     }
 
     @Override
@@ -77,6 +82,7 @@ public class LeaderboardScreen implements Screen {
 
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        titleFont.draw(batch, "Leaderboard",app.col_width*4,Gdx.graphics.getHeight()-50);
         batch.end();
 
         stage.act();
