@@ -38,12 +38,12 @@ public class HowToPlayScreen implements Screen {
 
         configureButton();
 
-        FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consolab.ttf"));
+        FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/BRUSHSCI.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter titleParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         titleParameter.size = 100;
         titleFont = title.generateFont(titleParameter);
 
-        FreeTypeFontGenerator text = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
+        FreeTypeFontGenerator text = new FreeTypeFontGenerator(Gdx.files.internal("fonts/BRUSHSCI.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter textParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         textParameter.size = 50;
         textFont = title.generateFont(textParameter);
@@ -51,7 +51,7 @@ public class HowToPlayScreen implements Screen {
 
     public void configureButton() {
         back = new TextButton("Back", app.skin,"small");
-        back.getLabel().setFontScale(4.0f);
+        back.getLabel().setFontScale(3.0f);
         back.setSize(app.col_width*4,app.row_height*1.5F);
         back.setPosition(app.col_width*4,app.row_height);
         back.addListener(new InputListener(){
@@ -72,7 +72,7 @@ public class HowToPlayScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        splashImg = new Texture("splash.png");
+        splashImg = new Texture("bg.png");
 
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

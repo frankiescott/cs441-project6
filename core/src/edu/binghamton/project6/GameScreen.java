@@ -22,7 +22,7 @@ public class GameScreen implements Screen {
         this.app = app;
 
         batch = new SpriteBatch();
-        splashImg = new Texture("splash.png");
+        splashImg = new Texture("bg.png");
 
         gravity = -4;
         player = new Player(0, 0, 15, 0, "badlogic.jpg", 500);

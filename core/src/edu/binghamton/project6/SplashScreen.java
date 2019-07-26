@@ -38,7 +38,7 @@ public class SplashScreen implements Screen {
         batch.end();
 
         //driver to change to menu screen
-        if (assetManager.update() && TimeUtils.timeSinceMillis(startTime) > 30000) {
+        if (assetManager.update() && TimeUtils.timeSinceMillis(startTime) > 3000) {
             app.setScreen(new MenuScreen(app));
         }
     }

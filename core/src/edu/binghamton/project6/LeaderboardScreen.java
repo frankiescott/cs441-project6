@@ -32,7 +32,7 @@ public class LeaderboardScreen implements Screen {
         this.app = app;
 
         batch = new SpriteBatch();
-        splashImg = new Texture("splash.png");
+        splashImg = new Texture("bg.png");
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -85,7 +85,7 @@ public class LeaderboardScreen implements Screen {
 
     public void configureButton() {
         back = new TextButton("Back", app.skin, "small");
-        back.getLabel().setFontScale(4.0f);
+        back.getLabel().setFontScale(3.0f);
         back.setSize(app.col_width * 4, app.row_height * 1.5F);
         back.setPosition(app.col_width * 4, app.row_height);
         back.addListener(new InputListener() {
