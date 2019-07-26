@@ -36,8 +36,10 @@ public class HowToPlayScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+        //back button
         configureButton();
 
+        //initialize fonts for the screen
         FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/BRUSHSCI.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter titleParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         titleParameter.size = 148;

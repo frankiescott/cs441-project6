@@ -80,6 +80,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         splashImg.dispose();
         batch.dispose();
+        textFont.dispose();
     }
 
     class GameObject {

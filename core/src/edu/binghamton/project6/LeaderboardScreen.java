@@ -49,6 +49,7 @@ public class LeaderboardScreen implements Screen {
 
     public void configureList() {
         container = new Table();
+        //turn on and off for guidelines for positioning help
         //container.setDebug(true);
         stage.addActor(container);
         container.setFillParent(true);
@@ -136,6 +137,7 @@ public class LeaderboardScreen implements Screen {
     @Override
     public void dispose() {
         splashImg.dispose();
+        titleFont.dispose();
         batch.dispose();
         stage.dispose();
     }

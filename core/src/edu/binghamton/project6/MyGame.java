@@ -11,6 +11,7 @@ public class MyGame extends Game{
 	SpriteBatch batch;
 	Texture img;
 
+	//these are all values we can access from any screen using app.variable
 	public float row_height;
 	public float col_width;
 	public float height;
@@ -24,7 +25,6 @@ public class MyGame extends Game{
 
 	@Override
 	public void create () {
-	    //these are all values we can access from any screen using app.variable
 		height = Gdx.graphics.getHeight();
 		row_height = Gdx.graphics.getHeight() / 12F;
 		col_width = Gdx.graphics.getWidth() / 12F;
@@ -32,7 +32,7 @@ public class MyGame extends Game{
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         prefs = Gdx.app.getPreferences("leaderboard");
 
-		setScreen(new SplashScreen(this));
+		setScreen(new SplashScreen(this)); //pass in this to constructor to make public variables accessible
 	}
 
 	@Override

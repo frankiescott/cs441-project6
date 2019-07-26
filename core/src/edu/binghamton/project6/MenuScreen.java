@@ -19,7 +19,7 @@ public class MenuScreen implements Screen {
 
     private Stage stage;
     private TextButton play, controls, leaderboard;
-    OrthographicCamera camera = null;
+    private OrthographicCamera camera; //used for positioning purposes
 
     public MenuScreen(final MyGame app) {
         super();
