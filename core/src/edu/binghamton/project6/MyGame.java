@@ -47,8 +47,9 @@ public class MyGame extends Game{
 		if (score < Integer.valueOf(split[1])) {
 			//score is less than #10 on the leaderboard and does not qualify for a high score
 			//to do - implement posting recent score to web server
+			return;
 		} else {
-			int position; //save position on leaderboard here
+			int position = 0; //save position on leaderboard here
 			for (int i = 1; i <= 10; ++i) {
 				String current = prefs.getString(Integer.valueOf(i).toString());
 				split = current.split(" ");
@@ -59,7 +60,13 @@ public class MyGame extends Game{
 					break; //leave the loop
 				}
 			}
-			//apply new score and push down list
+			//push down the other entries to make room for new high score
+			for (int i = 9; i >= position; --i) {
+				String data = prefs.getString(Integer.toString(i));
+				prefs.putString(Integer.toString(i+1), data);
+			}
+			//add new high score
+			prefs.putString(Integer.toString(position), name + " " + score);
 		}
 	}
 }
