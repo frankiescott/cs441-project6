@@ -40,4 +40,26 @@ public class MyGame extends Game{
 		batch.dispose();
 		img.dispose();
 	}
+
+	public void saveToLeaderboard(String name, int score) {
+		String last = prefs.getString("10");
+		String[] split = last.split(" "); //separate name and score
+		if (score < Integer.valueOf(split[1])) {
+			//score is less than #10 on the leaderboard and does not qualify for a high score
+			//to do - implement posting recent score to web server
+		} else {
+			int position; //save position on leaderboard here
+			for (int i = 1; i <= 10; ++i) {
+				String current = prefs.getString(Integer.valueOf(i).toString());
+				split = current.split(" ");
+				if (score < Integer.valueOf(split[1])) {
+					continue; //score too low, go to next spot on leaderboard
+				} else {
+					position = i; //found a score to replace
+					break; //leave the loop
+				}
+			}
+			//apply new score and push down list
+		}
+	}
 }
