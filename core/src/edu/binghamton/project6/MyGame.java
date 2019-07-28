@@ -31,8 +31,8 @@ public class MyGame extends Game{
 		width = Gdx.graphics.getWidth();
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         prefs = Gdx.app.getPreferences("leaderboard");
-
-		setScreen(new SplashScreen(this)); //pass in this to constructor to make public variables accessible
+        
+        setScreen(new SplashScreen(this)); //pass in this to constructor to make public variables accessible
 	}
 
 	@Override
@@ -67,6 +67,7 @@ public class MyGame extends Game{
 			}
 			//add new high score
 			prefs.putString(Integer.toString(position), name + " " + score);
+			prefs.flush();
 		}
 	}
 }
