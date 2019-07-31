@@ -30,6 +30,7 @@ public class HowToPlayScreen implements Screen {
         super();
         this.app = app;
         batch = new SpriteBatch();
+        splashImg = new Texture("bg.png");
         titleFont = new BitmapFont();
         textFont = new BitmapFont();
         stage = new Stage(new ScreenViewport());
@@ -73,8 +74,6 @@ public class HowToPlayScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        splashImg = new Texture("bg.png");
 
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

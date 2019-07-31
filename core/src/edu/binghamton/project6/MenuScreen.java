@@ -25,7 +25,8 @@ public class MenuScreen implements Screen {
         super();
         this.app = app;
         batch = new SpriteBatch();
-
+        splashImg = new Texture("bg.png");
+        logo = new Texture("logo.png");
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
@@ -93,9 +94,6 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        splashImg = new Texture("bg.png");
-        logo = new Texture("logo.png");
 
         batch.begin();
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
