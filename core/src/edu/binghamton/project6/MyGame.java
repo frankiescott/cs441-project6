@@ -31,7 +31,7 @@ public class MyGame extends Game{
 		width = Gdx.graphics.getWidth();
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         prefs = Gdx.app.getPreferences("leaderboard");
-        
+
         setScreen(new SplashScreen(this)); //pass in this to constructor to make public variables accessible
 	}
 
