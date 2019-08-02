@@ -102,7 +102,7 @@ public class HowToPlayScreen implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

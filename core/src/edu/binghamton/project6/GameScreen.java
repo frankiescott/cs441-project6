@@ -55,6 +55,7 @@ public class GameScreen implements Screen {
 
         player.update();
         player.render();
+        gameEnd(5000);
     }
 
     @Override
@@ -74,7 +75,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-
     }
 
     @Override

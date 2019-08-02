@@ -126,7 +126,7 @@ public class LeaderboardScreen implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
