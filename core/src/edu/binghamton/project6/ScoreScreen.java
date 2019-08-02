@@ -11,9 +11,12 @@ public class ScoreScreen implements Screen {
     private SpriteBatch batch;
     private Texture splashImg;
 
-    public ScoreScreen(final MyGame app) {
+    private int score;
+
+    public ScoreScreen(final MyGame app, int score) {
         super();
         this.app = app;
+        this.score = score;
         batch = new SpriteBatch();
         splashImg = new Texture("bg.png");
     }

@@ -20,6 +20,12 @@ public class GameScreen implements Screen {
     private float gravity;
     private BitmapFont textFont;
 
+    private int score;
+
+    public void gameEnd(int score) {
+        app.setScreen(new ScoreScreen(app, score));
+    }
+
     public GameScreen(final MyGame app) {
         super();
         this.app = app;
@@ -27,6 +33,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         splashImg = new Texture("bg.png");
 
+        score = 0;
         gravity = -4;
         player = new Player(0, 0, 15, 0, "badlogic.jpg", 500);
 
