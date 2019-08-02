@@ -64,10 +64,12 @@ public class ScoreScreen implements Screen {
 
         TextField.TextFieldStyle textFieldStyle = app.skin.get(TextField.TextFieldStyle.class);
         textFieldStyle.font.getData().setScale(3.0F);
-
         textField = new TextField("", textFieldStyle);
         textField.setSize(app.col_width*4,app.row_height*1.5F);
         textField.setPosition(app.width / 2 - (textField.getWidth() / 2),app.height / 2);
+
+        textField.setMaxLength(8); //so entries aren't super long
+        textField.setAlignment(1); //centered
         stage.addActor(textField);
     }
 
