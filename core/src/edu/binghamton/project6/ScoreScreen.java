@@ -117,5 +117,6 @@ public class ScoreScreen implements Screen {
         batch.dispose();
         splashImg.dispose();
         stage.dispose();
+        titleFont.dispose();
     }
 }
