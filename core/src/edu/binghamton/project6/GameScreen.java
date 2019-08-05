@@ -7,14 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class GameScreen implements Screen {
     private final MyGame app;
     private SpriteBatch batch;
+    private Stage stage;
     private Texture splashImg, objectImage;
-
     private float w, h;
 
     private int score;
@@ -29,7 +32,7 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGame app) {
         super();
         this.app = app;
-
+        stage = new Stage(new ScreenViewport());
         batch = new SpriteBatch();
         splashImg = new Texture("bg.png");
         objectImage = new Texture("block.png");
@@ -47,6 +50,7 @@ public class GameScreen implements Screen {
         object.width = 65;
         object.height = 65;
         spawnTime = TimeUtils.millis();
+
         objects.add(object);
     }
 
@@ -63,28 +67,20 @@ public class GameScreen implements Screen {
         if (TimeUtils.millis() - spawnTime > 1000) {
             spawnObject();
         }
+        if (Gdx.input.justTouched()) {
+            Vector3 touch = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            stage.getCamera().unproject(touch);
+            for (int i = 0; i < objects.size; ++i) {
+                if (objects.get(i).contains(touch.x, touch.y)) {
+                    objects.removeIndex(i);
+                }
+            }
+        }
         batch.end();
 
+        stage.act();
+        stage.draw();
         //gameEnd(5000);
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void show() {
     }
 
     @Override
@@ -97,5 +93,21 @@ public class GameScreen implements Screen {
     public void dispose() {
         splashImg.dispose();
         batch.dispose();
+    }
+
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    //unneeded overrides from interfaces
+    @Override
+    public void hide() {
+    }
+    @Override
+    public void pause() {
+    }
+    @Override
+    public void resume() {
     }
 }
