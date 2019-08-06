@@ -68,10 +68,10 @@ public class GameScreen implements Screen {
 
     private void spawnObject() {
         Rectangle object = new Rectangle();
-        object.x = MathUtils.random(app.col_width, app.width - app.col_width - 65);
-        object.y = MathUtils.random(app.row_height, app.height - app.row_height - 65);
-        object.width = 65;
-        object.height = 65;
+        object.x = MathUtils.random(app.col_width, app.width - app.col_width - 130);
+        object.y = MathUtils.random(app.row_height, app.height - app.row_height - 130);
+        object.width = 130;
+        object.height = 130;
         spawnTime = TimeUtils.millis();
         objects.add(object);
     }
