@@ -32,6 +32,7 @@ public class GameScreen implements Screen {
     private long spawnTime;
     private int misTapPointLoss;
     private int streak;
+    private int spawnModifier;
 
     public void gameEnd(int score) {
         app.setScreen(new ScoreScreen(app, score));
@@ -49,7 +50,7 @@ public class GameScreen implements Screen {
         score = 0;
         streak = 0;
         misTapPointLoss = 5; //will increase by 5 with each mistap
-
+        spawnModifier = 1000;
         //take care of fonts
         FreeTypeFontGenerator countDownGen = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter countDownParameterLarge = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -99,8 +100,12 @@ public class GameScreen implements Screen {
                 batch.draw(objectImage, object.x, object.y);
             }
             //spawns a new rectangle every second
-            if (TimeUtils.millis() - spawnTime > 1000) {
+            if (TimeUtils.millis() - spawnTime > spawnModifier) {
                 spawnObject();
+                spawnModifier -= 10;
+                if (spawnModifier < 300) {
+                    gameEnd(score);
+                }
             }
             //listens for input to see if a rectangle is touched
             if (Gdx.input.justTouched()) {
