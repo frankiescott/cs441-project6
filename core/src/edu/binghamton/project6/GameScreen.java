@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
     private Texture splashImg, objectImage;
-    private BitmapFont titleFont;
+    private BitmapFont countdownFont, scoreFont;
 
     private long startCount;
     private int countdown;
@@ -30,6 +30,8 @@ public class GameScreen implements Screen {
 
     private Array<Rectangle> objects;
     private long spawnTime;
+    private int misTapPointLoss;
+    private int streak;
 
     public void gameEnd(int score) {
         app.setScreen(new ScoreScreen(app, score));
@@ -43,12 +45,20 @@ public class GameScreen implements Screen {
         splashImg = new Texture("bg.png");
         objectImage = new Texture("block.png");
 
+        //score related variables
         score = 0;
+        streak = 0;
+        misTapPointLoss = 5; //will increase by 5 with each mistap
 
-        FreeTypeFontGenerator title = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter titleParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        titleParameter.size = 148;
-        titleFont = title.generateFont(titleParameter);
+        //take care of fonts
+        FreeTypeFontGenerator countDownGen = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter countDownParameterLarge = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        FreeTypeFontGenerator.FreeTypeFontParameter countDownParameterSmall = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        countDownParameterLarge.size = 148;
+        countDownParameterSmall.size = 54;
+        countdownFont = countDownGen.generateFont(countDownParameterLarge);
+        scoreFont = countDownGen.generateFont(countDownParameterSmall);
+
         countdown = 3;
         startCount = TimeUtils.millis();
 
@@ -57,8 +67,8 @@ public class GameScreen implements Screen {
 
     private void spawnObject() {
         Rectangle object = new Rectangle();
-        object.x = MathUtils.random(0, app.width - 65);
-        object.y = MathUtils.random(0, app.height - 65);
+        object.x = MathUtils.random(app.col_width, app.width - app.col_width - 65);
+        object.y = MathUtils.random(app.row_height, app.height - app.row_height - 65);
         object.width = 65;
         object.height = 65;
         spawnTime = TimeUtils.millis();
@@ -74,10 +84,10 @@ public class GameScreen implements Screen {
         batch.begin();
         //draw background
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        scoreFont.draw(batch, "[score:" + Integer.toString(score) + " | streak:" + Integer.toString(streak) + "]", 50, app.height - 50);
         //check if we are in the countdown period upon start of the game
         if (countdown > 0) {
-            titleFont.draw(batch, Integer.toString(countdown),app.width / 2,app.height / 2);
+            countdownFont.draw(batch, Integer.toString(countdown),app.width / 2,app.height / 2);
             if (TimeUtils.millis() - startCount > 1000) {
                 countdown -= 1;
                 startCount = TimeUtils.millis();
@@ -103,6 +113,7 @@ public class GameScreen implements Screen {
                         objects.removeIndex(i);
                     }
                 }
+                calculateScoreGain(touched);
             }
             batch.end();
         }
@@ -110,6 +121,23 @@ public class GameScreen implements Screen {
         stage.act();
         stage.draw();
         //gameEnd(5000);
+    }
+
+    public void calculateScoreGain(int touched) {
+        if (touched == 0) {
+            score -= misTapPointLoss;
+            misTapPointLoss += 5;
+            streak = 0;
+            if (score < 0) {
+                score = 0;
+            }
+        } else if (touched == 1) {
+            score = score + 50 + streak;
+            streak += 1;
+        } else {
+            score = score + 125 + streak;
+            streak += touched;
+        }
     }
 
     @Override
@@ -122,7 +150,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         splashImg.dispose();
         batch.dispose();
-        titleFont.dispose();
+        countdownFont.dispose();
     }
 
     @Override
