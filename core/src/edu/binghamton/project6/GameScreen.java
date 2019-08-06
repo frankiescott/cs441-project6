@@ -62,7 +62,6 @@ public class GameScreen implements Screen {
         object.width = 65;
         object.height = 65;
         spawnTime = TimeUtils.millis();
-
         objects.add(object);
     }
 

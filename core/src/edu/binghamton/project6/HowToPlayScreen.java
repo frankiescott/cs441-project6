@@ -22,9 +22,10 @@ public class HowToPlayScreen implements Screen {
     private BitmapFont titleFont, textFont;
     private TextButton back;
 
-    String howtoplay = "Instructions on how to play the game will be placed here.\n" +
-            "Implementation of the game has not been developed yet.\n" +
-            "This page will be updated as soon as a control scheme is established.";
+    String howtoplay = "Tap on enemies as they appear on-screen to defeat them!\n\n" +
+            "Defeat enemy\n50 pts\n\n" +
+            "Defeat two enemies with one tap\n125 pts\n\n" +
+            "Receive up to a 20 pt bonus for defeating enemies quickly!";
 
     public HowToPlayScreen(final MyGame app) {
         super();
