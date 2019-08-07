@@ -44,7 +44,7 @@ public class GameScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         batch = new SpriteBatch();
         splashImg = new Texture("bg.png");
-        objectImage = new Texture("block.png");
+        objectImage = new Texture("target.png");
 
         //score related variables
         score = 0;
