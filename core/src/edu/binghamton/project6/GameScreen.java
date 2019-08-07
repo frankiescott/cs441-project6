@@ -156,6 +156,7 @@ public class GameScreen implements Screen {
         splashImg.dispose();
         batch.dispose();
         countdownFont.dispose();
+        stage.dispose();
     }
 
     @Override
