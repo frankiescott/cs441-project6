@@ -70,6 +70,7 @@ public class ScoreScreen implements Screen {
 
         textField.setMaxLength(8); //so entries aren't super long
         textField.setAlignment(1); //centered
+        textField.setMessageText("Enter Name");
         stage.addActor(textField);
     }
 
