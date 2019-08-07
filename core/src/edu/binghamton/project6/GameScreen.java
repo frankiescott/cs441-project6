@@ -50,7 +50,7 @@ public class GameScreen implements Screen {
         score = 0;
         streak = 0;
         misTapPointLoss = 5; //will increase by 5 with each mistap
-        spawnModifier = 1000;
+        spawnModifier = 800;
         //take care of fonts
         FreeTypeFontGenerator countDownGen = new FreeTypeFontGenerator(Gdx.files.internal("fonts/consola.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter countDownParameterLarge = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -105,7 +105,7 @@ public class GameScreen implements Screen {
             if (TimeUtils.millis() - spawnTime > spawnModifier) {
                 spawnObject();
                 spawnModifier -= 10;
-                if (spawnModifier < 300) {
+                if (spawnModifier < 100) {
                     gameEnd(score);
                 }
             }
