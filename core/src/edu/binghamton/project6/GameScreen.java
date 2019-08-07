@@ -122,10 +122,8 @@ public class GameScreen implements Screen {
             }
             batch.end();
         }
-
         stage.act();
         stage.draw();
-        //gameEnd(5000);
     }
 
     public void calculateScoreGain(int touched) {
