@@ -85,9 +85,11 @@ public class GameScreen implements Screen {
         batch.begin();
         //draw background
         batch.draw(splashImg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //draw score display
         scoreFont.draw(batch, "[score:" + Integer.toString(score) + " | streak:" + Integer.toString(streak) + "]", 50, app.height - 50);
         //check if we are in the countdown period upon start of the game
         if (countdown > 0) {
+            //if so, display countdown before game start
             countdownFont.draw(batch, Integer.toString(countdown),app.width / 2,app.height / 2);
             if (TimeUtils.millis() - startCount > 1000) {
                 countdown -= 1;

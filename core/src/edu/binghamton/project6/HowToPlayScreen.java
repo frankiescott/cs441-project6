@@ -22,9 +22,9 @@ public class HowToPlayScreen implements Screen {
     private BitmapFont titleFont, textFont;
     private TextButton back;
 
-    String howtoplay = "Tap on enemies as they appear to defeat them!\n\n" +
-            "Defeat enemy\n50 pts\n\n" +
-            "Defeat two or more enemies with one tap\n125 pts\n\n" +
+    String howtoplay = "Tap on the targets as they appear!\n\n" +
+            "Destroy target\n50 pts\n\n" +
+            "Destroy two or more targets with one tap\n125 pts\n\n" +
             "Receive bonus points for streaks! Missed taps will cost you points!";
 
     public HowToPlayScreen(final MyGame app) {
