@@ -25,3 +25,32 @@ July 23rd - Leaderboard screen
 July 24th - Leaderboard data setup
 
 July 26th - Leaderboard data loading, graphics, and positioning final touches
+
+# Project 7
+
+Project 7 is an extension of Project 6 that deals with the implementation of the game.
+
+I started by implementing the logic behind how scores were submitted to the leaderboard. I created a simple score submission screen with a text box for the player to enter their name, paired with a submit button. I then wrote an algorithm that compares the player's score to the last leaderboard entry. If the player's score is higher, the algorithm searches for the position on the leaderboard the player's score should be submitted to, pushes down all leaderboard entries by one slot (the 10th entry gets removed), then saves the score. Lastly, I created a function that initialized the end-of-game process.
+
+Next was the implementation of the game. I wanted to create a game that was simple to play, but with a complex score system that produces varied results and gives the game a bit of a skill curve. I started by spawning black boxes randomly across the game screen every second. I coded the objects so when they are tapped, they disappear. I gave tapping a black box add a score of 50. It is also possible for boxes to spawn on top of each other, and if the player is able to destroy two boxes with one tap, they receive bonus points. If the player taps on the screen but does not tap a box, they lose 5 points. Frequent mistaps increase the point loss. The first time the player mistaps, they lose 5 points. The second time the player mistapes, they lose 10 points, etc. This ensures that players can not spam the screen with taps. They will be penalized heavily if they do so. Taps must be aimed and have a purpose! Once I had some basic gameplay implemented, I created a simple countdown system so the player has some time to prepare before the game starts. 
+
+I also added a streak count that keeps track of successful taps. Players receive a point bonus for maintaining streaks. The player earns 50 points plus their streak value for every successful tap. Upon a mistap, the streak resets to zero. I then added some variation to how the blocks spawned on screen. In the beginning of the game, the blocks spawn every 800 milliseconds. Every time a block is spawned, the spawn time decreases by 10 milliseconds. This causes the blocks to spawn quicker and quicker as the game progresses. Once the block spawn decreases to 100 milliseconds from 800, the game ends. 
+
+I then changed the black boxes to targets so the game was more aesthetically pleasing as a final touch to complete development.
+
+# Development Schedule
+
+July 27th - Saving scores to the leaderboard
+
+July 28th - Bug fixing
+
+July 31st - Created score screen & basic code cleanup
+
+August 2nd - Added widets to score screen & wrote end game function process
+
+August 5th - Basic implementation of the game & countdown process
+
+August 6th - Score calculation system and score display
+
+August 7th - Finishing touches
+
