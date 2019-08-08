@@ -36,7 +36,7 @@ Next was the implementation of the game. I wanted to create a game that was simp
 
 I also added a streak count that keeps track of successful taps. Players receive a point bonus for maintaining streaks. The player earns 50 points plus their streak value for every successful tap. Upon a mistap, the streak resets to zero. I then added some variation to how the blocks spawned on screen. In the beginning of the game, the blocks spawn every 800 milliseconds. Every time a block is spawned, the spawn time decreases by 10 milliseconds. This causes the blocks to spawn quicker and quicker as the game progresses. Once the block spawn decreases to 100 milliseconds from 800, the game ends. 
 
-I then changed the black boxes to targets so the game was more aesthetically pleasing as a final touch to complete development.
+I then changed the black boxes to targets so the game was more aesthetically pleasing as a final touch to complete development of the game. Lastly, I implemented an HTTP get request to the leaderboard saving method so scores are posted to the school's database.
 
 # Development Schedule
 
@@ -54,3 +54,4 @@ August 6th - Score calculation system and score display
 
 August 7th - Finishing touches
 
+August 8th - Score posting to web server
