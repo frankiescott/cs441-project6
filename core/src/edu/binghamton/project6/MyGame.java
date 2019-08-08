@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class MyGame extends Game{
 	SpriteBatch batch;
 	Texture img;
@@ -19,7 +23,7 @@ public class MyGame extends Game{
 	public Skin skin;
     public Preferences prefs;
 
-    private boolean configureLeaderboard = false;
+    private boolean configureLeaderboard = true;
 
 	public MyGame() {
 		super();
@@ -50,13 +54,11 @@ public class MyGame extends Game{
 		img.dispose();
 	}
 
-	public void saveToLeaderboard(String name, int score) {
+	public void saveToLeaderboard(String name, int score) throws Exception {
 		String last = prefs.getString("10");
 		String[] split = last.split(" "); //separate name and score
 		if (score < Integer.valueOf(split[1])) {
-			//score is less than #10 on the leaderboard and does not qualify for a high score
-			//to do - implement posting recent score to web server
-			return;
+			saveToDatabase(name, score);
 		} else {
 			int position = 0; //save position on leaderboard here
 			for (int i = 1; i <= 10; ++i) {
@@ -77,6 +79,19 @@ public class MyGame extends Game{
 			//add new high score
 			prefs.putString(Integer.toString(position), name + " " + score);
 			prefs.flush();
+			saveToDatabase(name, score);
+		}
+	}
+	public void saveToDatabase(String name, int score) throws Exception {
+		System.out.println("Saving to database...");
+		URL url = new URL("http://cs.binghamton.edu/~pmadden/courses/441score/postscore.php?player="+name+"&game=tapthetargets&score="+Integer.toString(score));
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		int responseCode = con.getResponseCode();
+		if (responseCode == HttpURLConnection.HTTP_OK) {
+			System.out.println("Posted score to database");
+		} else {
+			System.out.println(responseCode);
 		}
 	}
 }

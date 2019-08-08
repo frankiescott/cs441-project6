@@ -52,7 +52,11 @@ public class ScoreScreen implements Screen {
                 //handle grabbing name and score and saving to leaderboard then switch back to menu screen
                 String name = textField.getText();
                 name = name.replaceAll("\\s", ""); //remove spaces
-                app.saveToLeaderboard(name, score);
+                try {
+                    app.saveToLeaderboard(name, score);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 app.setScreen(new MenuScreen(app));
             }
             @Override
